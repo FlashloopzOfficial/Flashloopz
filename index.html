@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <style>body {
+    margin: 0;
+    padding: 0;
+    background-color: #ff4d4d; /* Красный фон из примера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.flash-wrapper {
+    width: 1542px;
+    height: 644px;
+    background-color: white;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Стили для кнопок (замените background на ваши картинки) */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+}
+ </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Место под логотип -->
+        <header class="logo">
+            <img src="logo.png" alt="FlashLoopz Logo">
+        </header>
+
+        <!-- Контейнер для флеш-плеера -->
+        <main class="flash-wrapper">
+            <embed src="your-flash-file.swf" width="1542" height="644">
+        </main>
+
+        <!-- Панель управления -->
+        <footer class="controls">
+            <button class="btn-prev">Назад</button>
+            <button class="btn-help">?</button>
+            <button class="btn-next">Вперед</button>
+        </footer>
+    </div>
+
+</body>
+</html>
