@@ -1,7 +1,75 @@
 <form id="uploadForm">
-  <input id="title" type="text" placeholder="Название" required>
-  <input id="file" type="file" accept=".swf" required>
-  <button type="submit">Загрузить</button>
+  <input
+    id="title"
+    type="text"
+    placeholder="Название ролика"
+    required
+  >
+
+  <textarea
+    id="description"
+    placeholder="Описание"
+  ></textarea>
+
+  <input
+    id="file"
+    type="file"
+    accept=".swf"
+    required
+  >
+
+  <button type="submit">
+    Загрузить
+  </button>
 </form>
 
-<script type="module" src="./upload.js"></script>
+<pre id="result"></pre>
+
+<script>
+  const form = document.querySelector("#uploadForm");
+  const result = document.querySelector("#result");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const data = new FormData();
+
+    data.append(
+      "title",
+      document.querySelector("#title").value
+    );
+
+    data.append(
+      "description",
+      document.querySelector("#description").value
+    );
+
+    data.append(
+      "file",
+      document.querySelector("#file").files[0]
+    );
+
+    result.textContent = "Загрузка...";
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/games",
+        {
+          method: "POST",
+          body: data
+        }
+      );
+
+      const answer = await response.json();
+
+      if (!response.ok) {
+        throw new Error(answer.error);
+      }
+
+      result.textContent =
+        `Готово!\nСтраница: ${answer.game.pageUrl}`;
+    } catch (error) {
+      result.textContent = `Ошибка: ${error.message}`;
+    }
+  });
+</script>
