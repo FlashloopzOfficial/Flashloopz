@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Просмотр ролика</title>
+</head>
+<body>
+  <h1 id="title">Загрузка...</h1>
+  <p id="description"></p>
+
+  <div id="player"></div>
+
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+
+  <script>
+    const API_URL = "https://api.example.com";
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+
+    async function loadGame() {
+      const response = await fetch(
+        `${API_URL}/api/games/${id}`
+      );
+
+      const game = await response.json();
+
+      if (!response.ok) {
+        document.body.innerHTML = "<h1>Ролик не найден</h1>";
+        return;
+      }
+
+      document.querySelector("#title").textContent = game.title;
+      document.querySelector("#description").textContent =
+        game.description || "";
+
+      const player = document.querySelector("#player");
+
+      const object = document.createElement("object");
+
+      object.data = game.fileUrl;
+      object.width = "800";
+      object.height = "600";
+
+      player.appendChild(object);
+    }
+
+    loadGame();
+  </script>
+</body>
+</html>
