@@ -148,3 +148,14 @@ app.post("/upload", upload.single("swf"), async (request, response) => {
 });
 
 app.use((error, request, response, next) => {
+        if (error instanceof multer.MulterError) {
+        return response.status(400).send("Файл слишком большой или некорректный");
+    }
+
+    response.status(400).send(error.message || "Ошибка загрузки");
+});
+
+app.listen(PORT, () => {
+    console.log(`Сайт запущен: http://localhost:${PORT}`);
+});
+
