@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка Flash-ролика</title>
+</head>
+<body>
+    <h1>Загрузить Flash-ролик</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label>
+            Название:
+            <input type="text" name="title" maxlength="100" required>
+        </label>
+
+        <br><br>
+
+        <label>
+            Описание:
+            <textarea name="description" maxlength="1000"></textarea>
+        </label>
+
+        <br><br>
+
+        <label>
+            SWF-файл:
+            <input type="file" name="swf" accept=".swf" required>
+        </label>
+
+        <br><br>
+
+        <button type="submit">Опубликовать</button>
+    </form>
+</body>
+</html>
